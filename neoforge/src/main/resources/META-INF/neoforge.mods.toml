@@ -18,21 +18,21 @@ modId = "neoforge"
 type = "required"
 versionRange = "[21.4,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[dependencies.ghost_boats]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.4,)"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[dependencies.ghost_boats]]
 modId = "architectury"
 type = "required"
 versionRange = "[15.0.3,)"
 ordering = "AFTER"
-side = "BOTH"
+side = "CLIENT"
 
 [[mixins]]
 config = "ghost_boats.mixins.json"

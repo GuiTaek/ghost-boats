@@ -8,18 +8,16 @@
     "Me!"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/GuiTaek/ghost-boats",
+    "sources": "https://github.com/GuiTaek/ghost-boats"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/ghost_boats/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.gmail.guitaekm.fabric.ExampleModFabric"
-    ],
+    "main": [],
     "client": [
-      "com.gmail.guitaekm.fabric.client.ExampleModFabricClient"
+      "com.gmail.guitaekm.fabric.client.GhostBoatsFabricMod"
     ]
   },
   "mixins": [
@@ -29,10 +27,6 @@
     "fabricloader": ">=0.16.14",
     "minecraft": "~1.21.4",
     "java": ">=21",
-    "architectury": ">=15.0.3",
-    "": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "architectury": ">=15.0.3"
   }
 }
