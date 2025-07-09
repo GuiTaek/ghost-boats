@@ -31,21 +31,24 @@ public final class GhostBoatsMod {
     public static final String MOD_ID = "ghost_boats";
     public static final Logger LOGGER = LogManager.getLogger(GhostBoatsMod.MOD_ID);
     public static Entity boat;
-
+    public static boolean boatVisible;
     public static void initWorld(Level level) {
         if (level == null) {
             throw new IllegalStateException("minecraft.level should not be null");
         }
         boat = new Boat(EntityType.OAK_BOAT, level, () -> Items.OAK_BOAT);
+        boatVisible = false;
     }
 
     // heavily guided by ChatGPT
     public static void renderBoat(PoseStack poseStack, Camera camera) {
+        if (!boatVisible) {
+            return;
+        }
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null) {
             return;
         }
-        boat.setPos(0, 128, 0);
         Vec3 camPos = camera.getPosition();
         minecraft.getEntityRenderDispatcher().render(
                 boat,
