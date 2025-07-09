@@ -3,7 +3,7 @@
   "id": "ghost_boats",
   "version": "${version}",
   "name": "Ghost Boats",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Show other boat racers as ghost boats.",
   "authors": [
     "Me!"
   ],

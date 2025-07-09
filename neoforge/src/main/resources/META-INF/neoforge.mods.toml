@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "MIT"
 
 [[mods]]
 modId = "ghost_boats"
 version = "${version}"
 displayName = "Ghost Boats"
-authors = "Me!"
+authors = "GuiTaek"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Show other boat racers as ghost boats.
 '''
-#logoFile = ""
+logoFile = "assets/ghost_boats/icon.png"
 
 [[dependencies.ghost_boats]]
 modId = "neoforge"
