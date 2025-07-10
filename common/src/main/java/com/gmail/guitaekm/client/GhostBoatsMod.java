@@ -89,7 +89,7 @@ public final class GhostBoatsMod {
     }
 
     public static void onForceDisplayKeyPressed() {
-        System.out.println("force display key pressed!");
+        RecordingHandler.forcedDisplay = true;
     }
 
     // heavily guided by ChatGPT

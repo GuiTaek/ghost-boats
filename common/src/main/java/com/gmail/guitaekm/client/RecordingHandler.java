@@ -23,6 +23,7 @@ public class RecordingHandler {
     public static int readFrameNr = -1;
     private static final String NUMBER_REGEX = "[+-]?[0-9]+\\.[0-9]+(E[+-]?[0-9]+)?";
     private static boolean brokenFile = false;
+    public static boolean forcedDisplay = false;
     public static Pattern STRING_TO_VALUES_REGEX = Pattern.compile("(%s);(%s);(%s);(%s);(%s)".formatted(
             NUMBER_REGEX,
             NUMBER_REGEX,
@@ -67,15 +68,19 @@ public class RecordingHandler {
             // world not loaded yet
             return;
         }
-        if (minecraft.player.getVehicle() == null) {
+        if (minecraft.player.getVehicle() == null && !forcedDisplay) {
             recordingRead.clear();
             brokenFile = false;
             readFrameNr = -1;
             GhostBoatsMod.boatVisible = false;
             return;
         }
+        if (minecraft.player.getVehicle() != null && forcedDisplay) {
+            forcedDisplay = false;
+        }
         if (readFrameNr >= recordingRead.size()) {
             GhostBoatsMod.boatVisible = false;
+            forcedDisplay = false;
             return;
         }
         GhostBoatsMod.boatVisible = true;
