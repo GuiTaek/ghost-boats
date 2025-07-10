@@ -1,13 +1,9 @@
 package com.gmail.guitaekm.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.data.DataProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -16,15 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.spi.LoggerRegistry;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraft.client.KeyMapping;
+import org.lwjgl.glfw.GLFW;
 
 
 public final class GhostBoatsMod {
@@ -32,12 +21,75 @@ public final class GhostBoatsMod {
     public static final Logger LOGGER = LogManager.getLogger(GhostBoatsMod.MOD_ID);
     public static Entity boat;
     public static boolean boatVisible;
+    public static KeyMapping displayConfig = new KeyMapping(
+            "key.ghost_boats.display_config",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_I,
+            "key.categories.ghost_boats"
+    );
+    public static boolean displayKeyPressed = false;
+    public static KeyMapping recordConfig = new KeyMapping(
+            "key.ghost_boats.record_config",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_O,
+            "key.categories.ghost_boats"
+    );
+    public static boolean recordKeyPressed = false;
+    public static KeyMapping forceDisplay = new KeyMapping(
+            "key.ghost_boats.force_display",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_K,
+            "key.categories.ghost_boats"
+    );
+    public static boolean forceKeyPressed = false;
     public static void initWorld(Level level) {
         if (level == null) {
-            throw new IllegalStateException("minecraft.level should not be null");
+            throw new IllegalStateException("level should not be null");
         }
         boat = new Boat(EntityType.OAK_BOAT, level, () -> Items.OAK_BOAT);
         boatVisible = false;
+    }
+    public static void onClientPostTick() {
+        handleKeys();
+        RecordingHandler.onClientPostTick();
+    }
+    public static void handleKeys() {
+        if (displayConfig.isDown()) {
+            if (!displayKeyPressed) {
+                onDisplayKeyPressed();
+            }
+            displayKeyPressed = true;
+        } else {
+            displayKeyPressed = false;
+        }
+        if (recordConfig.isDown()) {
+            if (!recordKeyPressed) {
+                onRecordKeyPressed();
+            }
+            recordKeyPressed = true;
+        } else {
+            recordKeyPressed = false;
+        }
+        if (forceDisplay.isDown()) {
+            if (!forceKeyPressed) {
+                onForceDisplayKeyPressed();
+            }
+            forceKeyPressed = true;
+        } else {
+            forceKeyPressed = false;
+        }
+    }
+
+    public static void onDisplayKeyPressed() {
+        System.out.println("display key pressed!");
+    }
+
+    public static void onRecordKeyPressed() {
+        System.out.println("record key pressed!");
+    }
+
+    public static void onForceDisplayKeyPressed() {
+        System.out.println("force display key pressed!");
     }
 
     // heavily guided by ChatGPT
