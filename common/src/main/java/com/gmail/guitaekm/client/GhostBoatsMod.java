@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -81,7 +82,7 @@ public final class GhostBoatsMod {
     }
 
     public static void onDisplayKeyPressed() {
-        System.out.println("display key pressed!");
+        Minecraft.getInstance().setScreen(new DisplayScreen());
     }
 
     public static void onRecordKeyPressed() {
