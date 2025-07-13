@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RecordingHandler {
+    public static boolean readingOn = false;
+    public static boolean writingOn = false;
     public static ResourceLocation writeLocation = ResourceLocation.fromNamespaceAndPath("ghost_boats", "save");
     public static ResourceLocation readLocation = ResourceLocation.fromNamespaceAndPath("ghost_boats", "load");
     public static List<Pair<Vec3, Float>> recordingWrite = new ArrayList<>();
@@ -55,8 +57,20 @@ public class RecordingHandler {
         if (minecraft.isPaused()) {
             return;
         }
-        RecordingHandler.handleRead(minecraft);
-        RecordingHandler.handleWrite(minecraft);
+        if (readingOn) {
+            RecordingHandler.handleRead(minecraft);
+        } else {
+            forcedDisplay = false;
+            recordingRead.clear();
+            brokenFile = false;
+            readFrameNr = -1;
+            GhostBoatsMod.boatVisible = false;
+        }
+        if (writingOn) {
+            RecordingHandler.handleWrite(minecraft);
+        } else {
+            recordingWrite.clear();
+        }
     }
 
     // exists for debugging reasons
@@ -71,6 +85,7 @@ public class RecordingHandler {
         GhostBoatsMod.boatVisible = true;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected static boolean recordingFaster(Path path) {
         try {
             // https://stackoverflow.com/a/1277904/3289974

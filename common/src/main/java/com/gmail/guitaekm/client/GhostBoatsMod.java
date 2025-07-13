@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -128,11 +129,31 @@ public final class GhostBoatsMod {
     }
 
     public static void onToggleDisplayKeyPressed() {
-        System.out.println("toggle display");
+        RecordingHandler.readingOn = !RecordingHandler.readingOn;
+        Minecraft.getInstance().getToastManager().addToast(
+                SystemToast.multiline(
+                        Minecraft.getInstance(),
+                        SystemToast.SystemToastId.NARRATOR_TOGGLE,
+                        Component.translatable("key.categories.ghost_boats"),
+                        Component.nullToEmpty("ghost boats display turned %s".formatted(
+                                RecordingHandler.readingOn ? "on" : "off"
+                        ))
+                )
+        );
     }
 
     public static void onToggleRecordingKeyPressed() {
-        System.out.println("toggle recording");
+        RecordingHandler.writingOn = !RecordingHandler.writingOn;
+        Minecraft.getInstance().getToastManager().addToast(
+                SystemToast.multiline(
+                        Minecraft.getInstance(),
+                        SystemToast.SystemToastId.NARRATOR_TOGGLE,
+                        Component.translatable("key.categories.ghost_boats"),
+                        Component.nullToEmpty("ghost boats recording turned %s".formatted(
+                                RecordingHandler.writingOn ? "on" : "off"
+                        ))
+                )
+        );
     }
 
     // heavily guided by ChatGPT
