@@ -28,16 +28,6 @@ public class FormatErrorScreen extends Screen {
         Minecraft.getInstance().setScreen(this.oldScreen);
     }
 
-    @Override
-    public boolean isPauseScreen() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldCloseOnEsc() {
-        return true;
-    }
-
     protected void redraw() {
         // can change ingame
         this.errorMessage = Component.translatable("desc.ghost_boats.format_error");

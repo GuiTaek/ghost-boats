@@ -27,16 +27,6 @@ public class DisplayScreen extends Screen {
         super(Component.translatable("key.ghost_boats.display_config"));
     }
 
-    @Override
-    public boolean isPauseScreen() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldCloseOnEsc() {
-        return true;
-    }
-
     protected void redraw() {
         // can change ingame
         Component OK_COMPONENT = Component.translatable("gui.ok");
