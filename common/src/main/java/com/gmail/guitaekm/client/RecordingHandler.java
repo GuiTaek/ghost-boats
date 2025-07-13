@@ -4,7 +4,6 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.world.level.storage.WorldData;
 import net.minecraft.world.phys.Vec3;
 
 import java.io.*;
@@ -13,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,6 +69,23 @@ public class RecordingHandler {
         GhostBoatsMod.boat.setPos(new Vec3(0, 128 + (double) counterDebug / 100, 0));
         counterDebug++;
         GhostBoatsMod.boatVisible = true;
+    }
+
+    protected static boolean recordingFaster(Path path) {
+        try {
+            // https://stackoverflow.com/a/1277904/3289974
+            BufferedReader reader = new BufferedReader(new FileReader(path.toString()));
+            int lines = 0;
+            while (reader.readLine() != null) lines++;
+            if (recordingWrite.size() > lines) {
+                return false;
+            }
+        } catch (FileNotFoundException ignored) {
+        } catch (IOException e) {
+            GhostBoatsMod.LOGGER.warn("Recording couldn't be saved because it couldn't be read for the override mode \"recording\"");
+            return false;
+        }
+        return true;
     }
 
     public static void handleRead(Minecraft minecraft) {
@@ -152,10 +169,19 @@ public class RecordingHandler {
                 return;
             }
             // guided by ChatGPT
-            Path savePath = Paths
-                    .get("generated")
-                    .resolve(writeLocation.getNamespace())
-                    .resolve(writeLocation.getPath() + ".txt");
+            Path savePath = getPath(writeLocation);
+            if (overrideState == OverrideState.RECORDING) {
+                if (!recordingFaster(savePath)) {
+                    recordingWrite.clear();
+                    return;
+                }
+            }
+            if (overrideState == OverrideState.DISPLAY) {
+                if (!recordingFaster(getPath(readLocation))) {
+                    recordingWrite.clear();
+                    return;
+                }
+            }
             try {
                 Files.createDirectories(savePath.getParent());
                 Writer writer = Files.newBufferedWriter(savePath);
