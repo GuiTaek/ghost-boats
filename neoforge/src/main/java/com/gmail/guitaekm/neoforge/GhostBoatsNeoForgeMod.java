@@ -27,6 +27,7 @@ public final class GhostBoatsNeoForgeMod {
         NeoForge.EVENT_BUS.addListener(GhostBoatsNeoForgeMod::onLevelLoad);
         NeoForge.EVENT_BUS.addListener(GhostBoatsNeoForgeMod::onClientTickPost);
         modEventBus.addListener(GhostBoatsNeoForgeMod::registerKeyBindings);
+        GhostBoatsMod.init();
     }
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (!event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_ENTITIES)) {

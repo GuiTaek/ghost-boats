@@ -38,6 +38,9 @@ public class RecordingHandler {
         DISPLAY
 
     }
+    public static void init() {
+        RecordingHandler.overrideState = OverrideState.ALWAYS;
+    }
     public static OverrideState overrideState;
 
     public static Path getPath(ResourceLocation location) {

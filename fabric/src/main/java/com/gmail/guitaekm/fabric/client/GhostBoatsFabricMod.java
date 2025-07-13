@@ -28,5 +28,6 @@ public final class GhostBoatsFabricMod implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.displayConfig);
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.recordConfig);
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.forceDisplay);
+        GhostBoatsMod.init();
     }
 }

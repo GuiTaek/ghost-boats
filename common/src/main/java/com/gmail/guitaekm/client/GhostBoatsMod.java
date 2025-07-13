@@ -35,6 +35,9 @@ public final class GhostBoatsMod {
             GLFW.GLFW_KEY_O,
             "key.categories.ghost_boats"
     );
+    public static void init() {
+        RecordingHandler.init();
+    }
     public static boolean recordKeyPressed = false;
     public static KeyMapping forceDisplay = new KeyMapping(
             "key.ghost_boats.force_display",
