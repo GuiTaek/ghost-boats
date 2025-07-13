@@ -8,6 +8,9 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,7 +54,6 @@ public class DisplayScreen extends Screen {
 
     @Override
     protected void init() {
-
         this.editBox = new EditBox(
                 this.font,
                 0,
@@ -68,7 +70,13 @@ public class DisplayScreen extends Screen {
                 Minecraft.getInstance().setScreen(new FormatErrorScreen(this));
                 return;
             }
-            RecordingHandler.readLocation = ResourceLocation.fromNamespaceAndPath(matcher.group(1), matcher.group(2));
+            ResourceLocation newReadLocation = ResourceLocation.fromNamespaceAndPath(matcher.group(1), matcher.group(2));
+            Path path = RecordingHandler.getPath(newReadLocation);
+            if (!path.toFile().exists()) {
+                Minecraft.getInstance().setScreen(new FileNotFoundScreen(this, Paths.get(".minecraft").resolve(path).toString().toString()));
+                return;
+            }
+            RecordingHandler.readLocation = newReadLocation;
             this.onClose();
         }).bounds(0, 0, 1, 1).build();
         this.redraw();
