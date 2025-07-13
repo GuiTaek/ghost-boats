@@ -4,5 +4,9 @@
   "key.ghost_boats.force_display": "Force Display",
   "key.categories.ghost_boats": "Ghost Boats",
   "desc.ghost_boats.format_error": "This format is not accepted. Use namespace:id like e.g. my_username:my_recording",
-  "desc.ghost_boats.file_not_found_error": "The file with following path does not exists:"
+  "desc.ghost_boats.file_not_found_error": "The file with following path does not exists:",
+  "gui.ghost_boats.cycle_button_always": "always",
+  "gui.ghost_boats.cycle_button_recording": "better than last recording",
+  "gui.ghost_boats.cycle_button_display": "better than current display",
+  "gui.ghost_boats.cycle_button_desc": "Override when"
 }

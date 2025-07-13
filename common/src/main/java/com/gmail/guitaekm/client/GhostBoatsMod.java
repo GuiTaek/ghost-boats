@@ -86,7 +86,7 @@ public final class GhostBoatsMod {
     }
 
     public static void onRecordKeyPressed() {
-        System.out.println("record key pressed!");
+        Minecraft.getInstance().setScreen(new RecordingScreen());
     }
 
     public static void onForceDisplayKeyPressed() {
