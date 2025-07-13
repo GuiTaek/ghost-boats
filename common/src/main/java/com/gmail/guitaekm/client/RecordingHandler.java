@@ -32,6 +32,13 @@ public class RecordingHandler {
             NUMBER_REGEX,
             NUMBER_REGEX
     ));
+    public enum OverrideState {
+        ALWAYS,
+        RECORDING,
+        DISPLAY
+
+    }
+    public static OverrideState overrideState;
 
     public static Path getPath(ResourceLocation location) {
         return Paths
