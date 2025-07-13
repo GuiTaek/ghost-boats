@@ -10,6 +10,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientWorldEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 
+import java.security.Key;
+
 @Environment(EnvType.CLIENT)
 public final class GhostBoatsFabricMod implements ClientModInitializer {
     @Override
@@ -28,6 +30,8 @@ public final class GhostBoatsFabricMod implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.displayConfig);
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.recordConfig);
         KeyBindingHelper.registerKeyBinding(GhostBoatsMod.forceDisplay);
+        KeyBindingHelper.registerKeyBinding(GhostBoatsMod.toggleDisplay);
+        KeyBindingHelper.registerKeyBinding(GhostBoatsMod.toggleRecording);
         GhostBoatsMod.init();
     }
 }

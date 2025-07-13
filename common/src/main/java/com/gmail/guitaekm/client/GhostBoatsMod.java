@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -46,6 +47,20 @@ public final class GhostBoatsMod {
             "key.categories.ghost_boats"
     );
     public static boolean forceKeyPressed = false;
+    public static KeyMapping toggleDisplay = new KeyMapping(
+            "key.ghost_boats.toggle_display",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_N,
+            "key.categories.ghost_boats"
+    );
+    public static boolean toggleDisplayKeyPressed = false;
+    public static KeyMapping toggleRecording = new KeyMapping(
+            "key.ghost_boats.toggle_recording",
+            InputConstants.Type.KEYSYM,
+            GLFW.GLFW_KEY_M,
+            "key.categories.ghost_boats"
+    );
+    public static boolean toggleRecordingKeyPressed = false;
     public static void initWorld(Level level) {
         if (level == null) {
             throw new IllegalStateException("level should not be null");
@@ -82,6 +97,22 @@ public final class GhostBoatsMod {
         } else {
             forceKeyPressed = false;
         }
+        if (toggleDisplay.isDown()) {
+            if (!toggleDisplayKeyPressed) {
+                onToggleDisplayKeyPressed();
+            }
+            toggleDisplayKeyPressed = true;
+        } else {
+            toggleDisplayKeyPressed = false;
+        }
+        if (toggleRecording.isDown()) {
+            if (!toggleRecordingKeyPressed) {
+                onToggleRecordingKeyPressed();
+            }
+            toggleRecordingKeyPressed = true;
+        } else {
+            toggleRecordingKeyPressed = false;
+        }
     }
 
     public static void onDisplayKeyPressed() {
@@ -94,6 +125,14 @@ public final class GhostBoatsMod {
 
     public static void onForceDisplayKeyPressed() {
         RecordingHandler.forcedDisplay = true;
+    }
+
+    public static void onToggleDisplayKeyPressed() {
+        System.out.println("toggle display");
+    }
+
+    public static void onToggleRecordingKeyPressed() {
+        System.out.println("toggle recording");
     }
 
     // heavily guided by ChatGPT

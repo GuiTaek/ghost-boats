@@ -2,6 +2,8 @@
   "key.ghost_boats.record_config": "Recording Configuration",
   "key.ghost_boats.display_config": "Display Configuration",
   "key.ghost_boats.force_display": "Force Display",
+  "key.ghost_boats.toggle_display": "Toggle Display",
+  "key.ghost_boats.toggle_recording": "Toggle Recording",
   "key.categories.ghost_boats": "Ghost Boats",
   "desc.ghost_boats.format_error": "This format is not accepted. Use namespace:id like e.g. my_username:my_recording",
   "desc.ghost_boats.file_not_found_error": "The file with following path does not exists:",

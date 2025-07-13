@@ -48,5 +48,7 @@ public final class GhostBoatsNeoForgeMod {
         event.register(GhostBoatsMod.displayConfig);
         event.register(GhostBoatsMod.recordConfig);
         event.register(GhostBoatsMod.forceDisplay);
+        event.register(GhostBoatsMod.toggleDisplay);
+        event.register(GhostBoatsMod.toggleRecording);
     }
 }
